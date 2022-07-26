@@ -1,0 +1,17 @@
+:root {
+  --base-black: #22272e;
+  --card-background: #2d333b;
+  --base-black-hover: rgba(97, 97, 97, 0.1);
+  --shadow-light: rgba(255, 255, 255, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.51);
+  --base-tx-color: #adbac7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
