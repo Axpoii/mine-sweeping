@@ -1,5 +1,5 @@
 <template>
-  <div class="hall-container">
+  <div class="hall-container" ref="hallContainer">
     <div class="room-list">
       <div class="room-item" v-for="(item, index) in rooms" :key="index">
         <div class="header">
@@ -25,8 +25,14 @@
       <IconMine />
     </div>
 
-    <n-drawer v-model:show="active" :width="502">
-      <n-drawer-content title=""> </n-drawer-content>
+    <n-drawer
+      v-model:show="active"
+      class="custom-drawer"
+      :to="hallContainer"
+      :style="{ width: 'auto' }"
+    >
+      <n-drawer-content title="" :body-style="{ width: '200px' }">
+      </n-drawer-content>
     </n-drawer>
   </div>
 </template>
@@ -55,6 +61,8 @@ const rooms = [
   { id: 2, status: "PLAYING", players: 2 },
   { id: 3, status: "PENDING", players: 4 },
 ];
+
+const hallContainer = ref(null);
 
 const active = ref(false);
 
@@ -120,7 +128,6 @@ const handleCreateRoom = () => {
           .icon {
             width: 24px;
             height: 24px;
-            display: inline-block;
             margin-right: 6px;
           }
         }
@@ -148,9 +155,18 @@ const handleCreateRoom = () => {
     justify-content: center;
     cursor: pointer;
 
+    .icon {
+      width: 36px;
+      height: 36px;
+    }
+
     &:hover {
       background-color: var(--base-black-hover);
     }
+  }
+
+  .custom-drawer {
+    width: 500px;
   }
 }
 </style>

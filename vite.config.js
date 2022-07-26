@@ -22,4 +22,9 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  css: {
+    postcss: {
+      plugins: [require("postcss-px2rem")({ remUnit: 192 })],
+    },
+  },
 });
