@@ -25,15 +25,97 @@
       <IconMine />
     </div>
 
-    <n-drawer
-      v-model:show="active"
-      class="custom-drawer"
-      :to="hallContainer"
-      :style="{ width: 'auto' }"
-    >
-      <n-drawer-content title="" :body-style="{ width: '200px' }">
-      </n-drawer-content>
-    </n-drawer>
+    <n-modal v-model:show="active" :to="hallContainer">
+      <n-card
+        class="create-modal"
+        :bordered="false"
+        size="medium"
+        role="dialog"
+        aria-modal="true"
+      >
+        <n-form ref="createForm" :model="form" size="medium">
+          <n-form-item label="模式">
+            <n-radio-group v-model:value="form.mode" name="radiogroup">
+              <n-space>
+                <n-radio value="1"> 标准 </n-radio>
+                <n-radio value="2"> 自定义 </n-radio>
+              </n-space>
+            </n-radio-group>
+          </n-form-item>
+          <template v-if="form.mode === '1'">
+            <n-form-item label="难度">
+              <n-radio-group
+                v-model:value="form.difficult"
+                name="radiobuttongroup1"
+              >
+                <n-radio-button value="easy" label="简单(9 * 9)" />
+                <n-radio-button value="medium" label="中等(16 * 16)" />
+                <n-radio-button value="hard" label="困难(16 * 30)" />
+              </n-radio-group>
+            </n-form-item>
+          </template>
+          <template v-else>
+            <n-space vertical>
+              <n-card size="small">
+                <template #header>
+                  <div class="inner-card-title">Player 1</div>
+                </template>
+                <template #header-extra>
+                  <n-popselect trigger="click">
+                    <n-button quaternary type="info" size="tiny">
+                      选择Map
+                    </n-button>
+                    <template #empty>
+                      <MineMapList></MineMapList>
+                    </template>
+                  </n-popselect>
+                </template>
+                <n-form-item label="行数" label-placement="left">
+                  <n-input-number v-model:value="value" clearable />
+                </n-form-item>
+                <n-form-item label="列数" label-placement="left">
+                  <n-input-number v-model:value="value" clearable />
+                </n-form-item>
+                <n-form-item label="雷数" label-placement="left">
+                  <n-input-number v-model:value="value" clearable />
+                </n-form-item>
+              </n-card>
+              <n-card size="small">
+                <template #header>
+                  <div class="inner-card-title">Player 2</div>
+                </template>
+                <template #header-extra>
+                  <n-popselect trigger="click">
+                    <n-button quaternary type="info" size="tiny">
+                      选择Map
+                    </n-button>
+                    <template #empty>
+                      <MineMapList></MineMapList>
+                    </template>
+                  </n-popselect>
+                </template>
+                <n-form-item label="行数" label-placement="left">
+                  <n-input-number v-model:value="value" clearable />
+                </n-form-item>
+                <n-form-item label="列数" label-placement="left">
+                  <n-input-number v-model:value="value" clearable />
+                </n-form-item>
+                <n-form-item label="雷数" label-placement="left">
+                  <n-input-number v-model:value="value" clearable />
+                </n-form-item>
+              </n-card>
+            </n-space>
+          </template>
+        </n-form>
+
+        <template #footer>
+          <n-space justify="end">
+            <n-button>取消</n-button>
+            <n-button type="primary">创建</n-button>
+          </n-space>
+        </template>
+      </n-card>
+    </n-modal>
   </div>
 </template>
 
@@ -42,8 +124,8 @@ import IconFight from "@/components/icons/IconFight.vue";
 import IconUser from "@/components/icons/IconUser.vue";
 import IconClock from "@/components/icons/IconClock.vue";
 import IconMine from "@/components/icons/IconMine.vue";
-import { ref } from "vue";
-import { NDrawer, NDrawerContent } from "naive-ui";
+import { reactive, ref } from "vue";
+import MineMapList from "@/components/MineMapList.vue";
 
 const statusMap = {
   PENDING: {
@@ -61,6 +143,13 @@ const rooms = [
   { id: 2, status: "PLAYING", players: 2 },
   { id: 3, status: "PENDING", players: 4 },
 ];
+
+const createForm = ref(null);
+
+const form = reactive({
+  mode: "1",
+  difficult: "",
+});
 
 const hallContainer = ref(null);
 
@@ -167,6 +256,18 @@ const handleCreateRoom = () => {
 
   .custom-drawer {
     width: 500px;
+  }
+
+  .create-modal {
+    position: fixed;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+    width: 800px;
+
+    .inner-card-title {
+      font-size: 14px;
+    }
   }
 }
 </style>
