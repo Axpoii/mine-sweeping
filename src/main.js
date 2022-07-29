@@ -15,6 +15,9 @@ import {
   NPopselect,
   NDivider,
   NIcon,
+  NGrid,
+  NGridItem,
+  NGi,
 } from "naive-ui";
 import "amfe-flexible";
 
@@ -40,6 +43,9 @@ const naive = create({
     NPopselect,
     NDivider,
     NIcon,
+    NGrid,
+    NGridItem,
+    NGi,
   ],
 });
 
