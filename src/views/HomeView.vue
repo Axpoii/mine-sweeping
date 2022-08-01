@@ -25,7 +25,11 @@
       <IconMine />
     </div>
 
-    <n-modal v-model:show="active" :to="hallContainer">
+    <n-modal
+      v-model:show="active"
+      :to="hallContainer"
+      :on-update:show="handleModalShow"
+    >
       <n-card
         class="create-modal"
         :bordered="false"
@@ -61,7 +65,10 @@
                   <div class="inner-card-title">Player 1</div>
                 </template>
                 <template #header-extra>
-                  <n-popselect trigger="click">
+                  <n-popselect
+                    trigger="click"
+                    :on-update:show="hanldePopchange"
+                  >
                     <n-button quaternary type="info" size="tiny">
                       选择Map
                     </n-button>
@@ -155,8 +162,22 @@ const hallContainer = ref(null);
 
 const active = ref(false);
 
+const canClose = ref(true);
+
 const handleCreateRoom = () => {
   active.value = true;
+};
+
+const hanldePopchange = (val) => {
+  setTimeout(() => {
+    canClose.value = !val;
+  }, 0);
+};
+
+const handleModalShow = (val) => {
+  if (canClose.value) {
+    active.value = val;
+  }
 };
 </script>
 
