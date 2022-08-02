@@ -114,8 +114,11 @@ import {
   ArrowForwardIosRound,
   PlusRound,
 } from "@vicons/material";
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import MineDB from "@/utils/DB.js";
+
+const mineDB = new MineDB();
 
 const router = useRouter();
 
@@ -134,6 +137,26 @@ const localConfig = reactive({
 const isAnimate = ref(false);
 
 const loading = ref(false);
+
+onMounted(() => {
+  mineDB
+    .getList()
+    .then((res) => {
+      const list = sliceArrayByLen(res, 5);
+      if (list[list.length - 1].length < 5) {
+        list[list.length - 1].push({
+          isCreate: true,
+        });
+      } else {
+        list.push([{ isCreate: true }]);
+      }
+      console.log("res", list);
+      localConfig.list = list;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 const handleShow = (page) => {
   if (page > pageConfig.list.length) {
@@ -201,6 +224,13 @@ const lastLocalPage = () => {
 const handleCreate = () => {
   router.push({
     path: "/create",
+  });
+};
+
+const sliceArrayByLen = (target, len) => {
+  const resArr = new Array(Math.ceil(target.length / len)).fill(1);
+  return resArr.map((item, index) => {
+    return target.slice(index * len, len * (index + 1));
   });
 };
 </script>

@@ -19,6 +19,9 @@ import {
   NGridItem,
   NGi,
   NSpin,
+  NAlert,
+  NInput,
+  NUpload,
 } from "naive-ui";
 import "amfe-flexible";
 
@@ -48,6 +51,9 @@ const naive = create({
     NGridItem,
     NGi,
     NSpin,
+    NAlert,
+    NInput,
+    NUpload,
   ],
 });
 
