@@ -66,6 +66,7 @@
                 </template>
                 <template #header-extra>
                   <n-popselect
+                    ref="firstPop"
                     trigger="click"
                     :on-update:show="hanldePopchange"
                   >
@@ -73,7 +74,7 @@
                       选择Map
                     </n-button>
                     <template #empty>
-                      <MineMapList></MineMapList>
+                      <MineMapList @select="handleSelectMap"></MineMapList>
                     </template>
                   </n-popselect>
                 </template>
@@ -153,6 +154,8 @@ const rooms = [
 
 const createForm = ref(null);
 
+const firstPop = ref(null);
+
 const form = reactive({
   mode: "1",
   difficult: "",
@@ -178,6 +181,12 @@ const handleModalShow = (val) => {
   if (canClose.value) {
     active.value = val;
   }
+};
+
+// 选择地图
+const handleSelectMap = (map) => {
+  firstPop.value.setShow(false);
+  console.log("select", map);
 };
 </script>
 

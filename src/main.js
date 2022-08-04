@@ -22,6 +22,7 @@ import {
   NAlert,
   NInput,
   NUpload,
+  NEmpty,
 } from "naive-ui";
 import "amfe-flexible";
 
@@ -54,6 +55,7 @@ const naive = create({
     NAlert,
     NInput,
     NUpload,
+    NEmpty,
   ],
 });
 

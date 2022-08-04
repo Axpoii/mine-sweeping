@@ -17,6 +17,11 @@ const router = createRouter({
       component: () => import("@/views/CreateView.vue"),
     },
     {
+      path: "/room/:id",
+      name: "room",
+      component: () => import("@/views/RoomView.vue"),
+    },
+    {
       path: "/404",
       name: "404",
       component: () => import("@/views/error/NotFound.vue"),
