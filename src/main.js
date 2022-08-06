@@ -23,6 +23,11 @@ import {
   NInput,
   NUpload,
   NEmpty,
+  NTabs,
+  NTabPane,
+  NTag,
+  NImage,
+  NPagination,
 } from "naive-ui";
 import "amfe-flexible";
 
@@ -56,6 +61,11 @@ const naive = create({
     NInput,
     NUpload,
     NEmpty,
+    NTabs,
+    NTabPane,
+    NTag,
+    NImage,
+    NPagination,
   ],
 });
 

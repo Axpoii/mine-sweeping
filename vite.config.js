@@ -24,7 +24,7 @@ export default defineConfig({
   },
   css: {
     postcss: {
-      plugins: [require("postcss-px2rem")({ remUnit: 192 })],
+      plugins: [require("postcss-px2rem")({ remUnit: 192, minPixelValue: 1 })],
     },
   },
 });

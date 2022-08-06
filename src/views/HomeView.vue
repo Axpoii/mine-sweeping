@@ -65,7 +65,15 @@
                   <div class="inner-card-title">Player 1</div>
                 </template>
                 <template #header-extra>
-                  <n-popselect
+                  <n-button
+                    quaternary
+                    type="info"
+                    size="tiny"
+                    @click="active2 = true"
+                  >
+                    选择Map
+                  </n-button>
+                  <!-- <n-popselect
                     ref="firstPop"
                     trigger="click"
                     :on-update:show="hanldePopchange"
@@ -76,7 +84,7 @@
                     <template #empty>
                       <MineMapList @select="handleSelectMap"></MineMapList>
                     </template>
-                  </n-popselect>
+                  </n-popselect> -->
                 </template>
                 <n-form-item label="行数" label-placement="left">
                   <n-input-number v-model:value="value" clearable />
@@ -93,14 +101,17 @@
                   <div class="inner-card-title">Player 2</div>
                 </template>
                 <template #header-extra>
-                  <n-popselect trigger="click">
+                  <n-button quaternary type="info" size="tiny">
+                    选择Map
+                  </n-button>
+                  <!-- <n-popselect trigger="click">
                     <n-button quaternary type="info" size="tiny">
                       选择Map
                     </n-button>
                     <template #empty>
                       <MineMapList></MineMapList>
                     </template>
-                  </n-popselect>
+                  </n-popselect> -->
                 </template>
                 <n-form-item label="行数" label-placement="left">
                   <n-input-number v-model:value="value" clearable />
@@ -124,6 +135,8 @@
         </template>
       </n-card>
     </n-modal>
+
+    <MineMaps v-model:show="active2"></MineMaps>
   </div>
 </template>
 
@@ -133,7 +146,7 @@ import IconUser from "@/components/icons/IconUser.vue";
 import IconClock from "@/components/icons/IconClock.vue";
 import IconMine from "@/components/icons/IconMine.vue";
 import { reactive, ref } from "vue";
-import MineMapList from "@/components/MineMapList.vue";
+import MineMaps from "@/components/MineMaps.vue";
 
 const statusMap = {
   PENDING: {
@@ -154,7 +167,7 @@ const rooms = [
 
 const createForm = ref(null);
 
-const firstPop = ref(null);
+// const firstPop = ref(null);
 
 const form = reactive({
   mode: "1",
@@ -165,17 +178,19 @@ const hallContainer = ref(null);
 
 const active = ref(false);
 
+const active2 = ref(true);
+
 const canClose = ref(true);
 
 const handleCreateRoom = () => {
   active.value = true;
 };
 
-const hanldePopchange = (val) => {
-  setTimeout(() => {
-    canClose.value = !val;
-  }, 0);
-};
+// const hanldePopchange = (val) => {
+//   setTimeout(() => {
+//     canClose.value = !val;
+//   }, 0);
+// };
 
 const handleModalShow = (val) => {
   if (canClose.value) {
@@ -184,10 +199,10 @@ const handleModalShow = (val) => {
 };
 
 // 选择地图
-const handleSelectMap = (map) => {
-  firstPop.value.setShow(false);
-  console.log("select", map);
-};
+// const handleSelectMap = (map) => {
+//   firstPop.value.setShow(false);
+//   console.log("select", map);
+// };
 </script>
 
 <style lang="scss" scoped>
